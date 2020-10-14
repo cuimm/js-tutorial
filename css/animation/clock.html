@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS-DEMO-Clock</title>
+</head>
+<body>
+<style>
+  /*
+   * animation-name：运动轨迹的名称（@keyframes设置运动轨迹）
+   * animation-duration：完成动画需要的总时间
+   * animation-timing-function：运动方式，默认值ease非匀速，linear匀速，ease-in加速，ease-out减速...
+   * animation-delay：延迟时间，默认时0s代表立即执行
+   * animation-iteration-count：动画执行的次数，默认是1代表执行一次就结束了，infinite是无限次运动
+   * animation-fill-mode：设置动画的状态
+   *      none默认值：无任何特殊状态设置
+   *      forwards：动画完成后会停留在最后一帧的位置，（默认动画执行完成会回退到起始位置）
+   *      backwards：只有在动画有延迟时间的时候才有用，当动画在延迟时间内，让运动的元素在运动轨迹的第一帧位置等待
+   *      both：同时具备以上两个效果
+  */
+  .clock-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: yellow;
+    width: 5px;
+    height: 180px;
+    margin: auto;
+    transform-origin: center top 0;
+    animation: swing 2s linear infinite;
+  }
+  .clock-box::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: green;
+  }
+  @keyframes swing {
+    0% {
+      transform: rotate(45deg);
+    }
+    25% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-45deg);
+    }
+    75% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(45deg);
+    }
+  }
+</style>
+<div class="clock-box"></div>
+</body>
+</html>
