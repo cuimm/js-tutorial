@@ -1,0 +1,39 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>节流</title>
+</head>
+<body>
+
+<script>
+  /**
+   * 节流
+   * 高频事件触发，N秒内只会执行一次，所以节流会稀释函数的执行频率
+   * @param fn
+   * @param wait
+   * @returns {Function}
+   */
+  function throttle(fn, wait) {
+    let flag = true;
+    return function () {
+      if (!flag) return;
+      flag = false;
+      setTimeout(() => {
+        fn.apply(this, arguments);
+        flag = true;
+      }, wait);
+    }
+  }
+
+  /**************** test *******************/
+  const logger = function () {
+    console.log('logger', ...arguments);
+  };
+  window.addEventListener('resize', throttle(logger.bind(null, 'cuimm', 18), 3000));
+</script>
+
+</body>
+</html>

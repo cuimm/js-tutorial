@@ -65,7 +65,7 @@ class BST {
   }
 
   insertNode(element) {
-    
+
   }
 
   /**

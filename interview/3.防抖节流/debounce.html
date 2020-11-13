@@ -1,0 +1,42 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+</head>
+<body>
+<input type="text" id="search" placeholder="请输入...">
+
+<script>
+  /**
+   * 防抖
+   * 触发高频事件N秒内函数只会执行一次，如果N秒内高频事件再次被触发，则重新计算时间。
+   * @param fn 待触发的高频回调事件
+   * @param wait 触发函数等待事件
+   * @returns {Function}
+   */
+  function debounce(fn, wait = 500) {
+    let timeout = null; // 创建一个标志来存放定时器的返回值
+
+    return function () {
+      console.log('此处不断执行');
+
+      clearTimeout(timeout);  // 每当用户输入的时候将前面的定时器clear掉
+
+      timeout = setTimeout(() => {  // 然后创建一个新的setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数
+        fn.apply(this, arguments);
+      }, wait);
+    }
+  }
+
+  /**************** test *******************/
+  const search = document.getElementById('search');
+  const logger = function () {
+    console.log('logger::防抖', Array.from(arguments));
+  };
+  search.addEventListener('input', debounce(logger.bind(null, 'cuimm', 18), 500))
+</script>
+</body>
+</html>
